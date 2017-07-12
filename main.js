@@ -6,16 +6,42 @@ const url = require('url')
 // be closed automatically when the JavaScript object is garbage collected.
 let win
 
+
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({width: 406, height: 850})
+  win = new BrowserWindow({width: 406, height: 840})
 
   // and load the index.html of the app.
-  win.loadURL(url.format({
-    pathname: path.join(__dirname, './public/views/index.html'),
-    protocol: 'file:',
-    slashes: true
-  }))
+  // win.loadURL(url.format({
+  //   pathname: path.join(__dirname, './public/views/index.html'),
+  //   protocol: 'file:',
+  //   slashes: true
+  // }))
+
+// to use EXPRESS, run it using a localhost: 5000
+const express = require('express')
+const root = require('path').join(__dirname, 'public/')
+
+// let port = Math.floor( 3000 + Math.random() * 1000 )
+
+var app1 = express();
+
+app1.use(express.static(root))
+app1.get('/', (req, res) => {
+    res.sendFile(root + 'views/index.html')
+}).listen(5000)
+
+// and load the index.html of the app.
+win.loadURL('http://localhost:5000')
+
+var bodyParser = require('body-parser');
+
+app1.use(bodyParser.urlencoded({extended: true}));
+
+var math = require(root + '../routes/math');
+app1.use('/math', math);
+
+
 
   // Open the DevTools.
   // win.webContents.openDevTools()
@@ -53,24 +79,3 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
-var express = require('express');
-// var path = require('path');
-var bodyParser = require('body-parser');
-
-// var songs = require('./data.json'); //
-var math = require('./routes/math');
-
-var app1 = express();
-
-app1.use(express.static('public'));
-
-// convert any url encoded body into a JS object
-// added to req.body
-app1.use(bodyParser.urlencoded({extended: true}));
-
-app1.use('/math', math);
-//sends all /math requests to the math.js router.
-
-app1.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, 'public/views/index.html'));
-});

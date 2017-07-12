@@ -1,7 +1,7 @@
 var express = require('express')
 var router = express.Router()
 
-
+// console.log("math.js loaded");
 
 var mathProblemObject = {};
 
@@ -22,7 +22,7 @@ var resultString = "";
 
 
 router.post('/add', function (req, res) {
-  console.log('got here!' , req.body);
+  // console.log('got here!' , req.body);
   result = parseFloat(req.body.xValueString) + parseFloat(req.body.yValueString);
   resultString = req.body.xValueString+ " + " + req.body.yValueString+ " = " + result;
   req.body.result = result; // adds result to req body

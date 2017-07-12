@@ -161,9 +161,9 @@ function clearResults () {
 
 function doMath(mathData) {
 // this function takes the data and sends it to the server to be calculated.
-console.log("in doMath ", mathData);
+// console.log("in doMath ", mathData);
   $.ajax({
-    url: '/math/' + mathData.operation,
+    url: '../../math/' + mathData.operation,
     type: 'POST',
     data: mathData,
     success: getResult,
@@ -173,10 +173,10 @@ console.log("in doMath ", mathData);
 
 
 function getResult () {
-  console.log("trying to get data back -- getResult function");
+  // console.log("trying to get data back -- getResult function");
 // gets the result back from the server after the POST was successful
   $.ajax({
-    url: '/math',
+    url: '../../math',
     type: 'GET',
     success: displayResult
   });
