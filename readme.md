@@ -12,7 +12,7 @@ This application is designed to work natively on a computer desktop using Electr
 Bill Kremer
 
 ### Date of Publication:
-January 22, 2017
+July 12, 2017
 
 ### Technology Used:
 
